@@ -9,7 +9,7 @@ default_args = {
     'depends_on_past': False,
     # 最初のタスクの実行日時は、start_dateではなく、start_date+schedule_intervalとなる
     # イメージとしては、start_dateで指定した日時からデータが蓄積され始め、schedule_intervalが経過したらdailyであれば1日分のデータを処理を行う感じ
-    'start_date': datetime(2018, 4, 21, 10, 0, 0), # DAGの実行開始日時
+    'start_date': datetime(2019, 7, 24, 10, 0, 0), # DAGの実行開始日時
     'schedule_interval': timedelta(days=1), # 実行間隔
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
