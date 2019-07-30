@@ -8,28 +8,31 @@ import utils.slack_monkey_patch
 
 utils.slack_monkey_patch.apply_monkey_patch_if_needed()
 
+
 def notify_error(context):
 
     SlackWebhookHook(
       http_conn_id='slack_playing_ml',
       channel='ml',
       icon_emoji=':cat:',
-      message= ''' Task: {task_id} failed '''.format(task_id=context.get('task_instance').task_id)
+      message=''' Task: {task_id} failed '''.format(task_id=context.get('task_instance').task_id)
     ).execute()
+
 
 def notify_success(context):
     SlackWebhookHook(
         http_conn_id='slack_playing_ml',
-        message= ''' Task: {task_id} successed '''.format(task_id=context.get('task_instance').task_id),
+        message=''' Task: {task_id} successed '''.format(task_id=context.get('task_instance').task_id),
         channel='ml',
         icon_emoji=':dog:'
     ).execute()
 
+
 default_args = {
     'owner': 'duan',
     'depends_on_past': False,
-    'start_date': datetime(2019, 7, 24, 10, 0, 0), # DAGの実行開始日時
-    'schedule_interval': timedelta(days=1), # 実行間隔
+    'start_date': datetime(2019, 7, 24, 10, 0, 0),  # DAGの実行開始日時
+    'schedule_interval': timedelta(days=1),  # 実行間隔
     'retries': 1,
     'retry_delay': timedelta(minutes=1),
     'provide_context': True,
